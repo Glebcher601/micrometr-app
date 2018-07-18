@@ -4,6 +4,7 @@ import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.client.WebClient;
 
+@Deprecated
 public class DomainAwareBuilder {
   private WebClient.RequestBodyUriSpec uriSpec;
 

@@ -1,26 +1,35 @@
 package com.nixsolutions.micrometr.service.external.alphavintage;
 
+import com.fasterxml.jackson.databind.JsonNode;
+import com.nixsolutions.micrometr.model.alphavintage.TimeSeriesStockSnapshot;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpMethod;
-import org.springframework.web.reactive.function.client.WebClient;
-import com.nixsolutions.micrometr.model.alphavintage.TimeSeriesStockSnapshot;
-import org.springframework.web.reactive.function.client.WebClient.RequestBodyUriSpec;
+import static com.nixsolutions.micrometr.service.external.alphavintage.enums.Endpoints.TIME_SERIES_INTRADAY;
+import static com.nixsolutions.micrometr.service.external.alphavintage.enums.Intervals.FIFTEEN_MINUTES;
+import static org.springframework.http.HttpMethod.GET;
 
-import static com.nixsolutions.micrometr.service.external.alphavintage.DomainAwareBuilder.GETDomainAwareBuilder;
-
+@Component
 public class AlphaVintageDataPullService {
+
   @Autowired
-  private WebClient apiWebClient;
+  private DomainAwareWebClientBuilder domainAwareWebClientBuilder;
 
   public AlphaVintageDataPullService() {
 
   }
 
   public List<TimeSeriesStockSnapshot> getIntraDayStockSnapShots() {
-    GETDomainAwareBuilder(apiWebClient);
-
+    JsonNode msft = methodGETbuilder()
+            .setFunction(TIME_SERIES_INTRADAY)
+            .setInterval(FIFTEEN_MINUTES)
+            .setSymbol("MSFT")
+            .buildUriSpec()
+            .retrieve()
+            .bodyToMono(JsonNode.class)
+            .block();
     return null;
   }
 
@@ -48,5 +57,7 @@ public class AlphaVintageDataPullService {
     return null;
   }
 
-
+  private DomainAwareBuilderv2 methodGETbuilder() {
+    return domainAwareWebClientBuilder.newBuilder(GET);
+  }
 }
