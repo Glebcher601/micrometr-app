@@ -1,7 +1,5 @@
 package com.nixsolutions.micrometr.utils;
 
-import com.nixsolutions.micrometr.service.external.alphavintage.enums.Endpoints;
-
 public interface EnumWithValue<E extends Enum<E>, T>
 {
 

@@ -8,9 +8,9 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import lombok.Data;
 
-@Document(collection = "stock_snapshot")
+//@Document(collection = "stock_snapshot")
 @Data
-public class TimeSeriesStockSnapshot implements Serializable {
+public class StockSnapshot implements Serializable {
   @Id
   private long id;
 

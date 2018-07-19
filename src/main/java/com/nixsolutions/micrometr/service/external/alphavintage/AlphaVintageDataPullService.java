@@ -1,10 +1,14 @@
 package com.nixsolutions.micrometr.service.external.alphavintage;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
-import com.nixsolutions.micrometr.model.alphavintage.TimeSeriesStockSnapshot;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.nixsolutions.micrometr.model.alphavintage.StockSnapshot;
+import com.nixsolutions.micrometr.model.alphavintage.StockSnapshotsInPeriod;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import javax.annotation.Resource;
 import java.util.List;
 
 import static com.nixsolutions.micrometr.service.external.alphavintage.enums.Endpoints.TIME_SERIES_INTRADAY;
@@ -17,43 +21,49 @@ public class AlphaVintageDataPullService {
   @Autowired
   private DomainAwareRequestBuilderFactory domainAwareRequestBuilderFactory;
 
+  @Resource(name = "customMapper")
+  private ObjectMapper customMapper;
+
   public AlphaVintageDataPullService() {
 
   }
 
-  public List<TimeSeriesStockSnapshot> getIntraDayStockSnapShots() {
+  public List<StockSnapshot> getIntraDayStockSnapShots() throws JsonProcessingException {
     JsonNode msft = methodGETbuilder()
-            .setFunction(TIME_SERIES_INTRADAY)
-            .setInterval(FIFTEEN_MINUTES)
-            .setSymbol("MSFT")
-            .buildUriSpec()
-            .retrieve()
-            .bodyToMono(JsonNode.class)
-            .block();
+        .setFunction(TIME_SERIES_INTRADAY)
+        .setInterval(FIFTEEN_MINUTES)
+        .setSymbol("MSFT")
+        .buildUriSpec()
+        .retrieve()
+        .bodyToMono(JsonNode.class)
+        .block();
+
+    StockSnapshotsInPeriod stockSnapshotsInPeriod = customMapper.treeToValue(msft, StockSnapshotsInPeriod.class);
+
     return null;
   }
 
-  public List<TimeSeriesStockSnapshot> getDailyStockSnapShots() {
+  public List<StockSnapshot> getDailyStockSnapShots() {
     return null;
   }
 
-  public List<TimeSeriesStockSnapshot> getDailyAdjustedStockSnapShots() {
+  public List<StockSnapshot> getDailyAdjustedStockSnapShots() {
     return null;
   }
 
-  public List<TimeSeriesStockSnapshot> getWeeklyStockSnapShots() {
+  public List<StockSnapshot> getWeeklyStockSnapShots() {
     return null;
   }
 
-  public List<TimeSeriesStockSnapshot> getWeeklyAdjustedStockSnapShots() {
+  public List<StockSnapshot> getWeeklyAdjustedStockSnapShots() {
     return null;
   }
 
-  public List<TimeSeriesStockSnapshot> getMonthlyStockSnapShots() {
+  public List<StockSnapshot> getMonthlyStockSnapShots() {
     return null;
   }
 
-  public List<TimeSeriesStockSnapshot> getMonthlyAdjustedStockSnapShots() {
+  public List<StockSnapshot> getMonthlyAdjustedStockSnapShots() {
     return null;
   }
 

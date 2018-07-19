@@ -29,8 +29,8 @@ public class DomainAwareRequestBuilder {
     return proceedBuild(UriParams.API_KEY, apiKey);
   }
 
-  public DomainAwareRequestBuilder setContent(String content) {
-    return proceedBuild(UriParams.CONTENT, content);
+  public DomainAwareRequestBuilder setOutputSize(String outputSize) {
+    return proceedBuild(UriParams.OUTPUT_SIZE, outputSize);
   }
 
   public DomainAwareRequestBuilder setFunction(Endpoints function) {
@@ -60,6 +60,6 @@ public class DomainAwareRequestBuilder {
     public static final String API_KEY = "apikey";
     public static final String INTERVAL = "interval";
     public static final String SYMBOL = "symbol";
-    public static final String CONTENT = "content";
+    public static final String OUTPUT_SIZE = "outputsize";
   }
 }

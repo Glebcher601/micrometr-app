@@ -3,3 +3,15 @@ api:
     - https://www.alphavantage.co/query?
   key:
     - LEP0XRATU8LATEQ7
+job:
+  params:
+    symbols:
+      - MSFT
+    interval:
+      - 15min
+    function:
+      - TIME_SERIES_INTRADAY
+    content:
+      - full
+    cron:
+      -
