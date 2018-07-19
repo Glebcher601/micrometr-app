@@ -17,11 +17,11 @@ import static org.junit.Assert.assertEquals;
 @ComponentScan(value = {"com.nixsolutions.micrometr.service.external"})
 @PropertySource("classpath:application.properties")
 @RunWith(SpringRunner.class)
-@ContextConfiguration(classes = {DomainAwareBuilderv2Test.class, ApplicationConfig.class})
-public class DomainAwareBuilderv2Test
+@ContextConfiguration(classes = {DomainAwareRequestBuilderTest.class, ApplicationConfig.class})
+public class DomainAwareRequestBuilderTest
 {
   @Autowired
-  private DomainAwareWebClientBuilder domainAwareWebClientBuilder;
+  private DomainAwareRequestBuilderFactory domainAwareRequestBuilderFactory;
 
   @Test
   public void testSingleParam() throws Exception

@@ -15,7 +15,7 @@ import static org.springframework.http.HttpMethod.GET;
 public class AlphaVintageDataPullService {
 
   @Autowired
-  private DomainAwareWebClientBuilder domainAwareWebClientBuilder;
+  private DomainAwareRequestBuilderFactory domainAwareRequestBuilderFactory;
 
   public AlphaVintageDataPullService() {
 
@@ -57,7 +57,7 @@ public class AlphaVintageDataPullService {
     return null;
   }
 
-  private DomainAwareBuilderv2 methodGETbuilder() {
-    return domainAwareWebClientBuilder.newBuilder(GET);
+  private DomainAwareRequestBuilder methodGETbuilder() {
+    return domainAwareRequestBuilderFactory.newBuilder(GET);
   }
 }

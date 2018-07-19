@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.client.WebClient;
 
 @Component
-public class DomainAwareWebClientBuilder
+public class DomainAwareRequestBuilderFactory
 {
   @Autowired
   private WebClient webClient;
@@ -17,9 +17,9 @@ public class DomainAwareWebClientBuilder
   @Value("${api.url}")
   private String apiUrl;
 
-  public DomainAwareBuilderv2 newBuilder(HttpMethod method)
+  public DomainAwareRequestBuilder newBuilder(HttpMethod method)
   {
-    return new DomainAwareBuilderv2(apiUrl, apiKey, method);
+    return new DomainAwareRequestBuilder(apiUrl, apiKey, method);
   }
 
 }
