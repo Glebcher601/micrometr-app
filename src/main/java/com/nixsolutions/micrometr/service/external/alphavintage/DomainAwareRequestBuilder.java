@@ -51,7 +51,7 @@ public class DomainAwareRequestBuilder {
   }
 
   public WebClient.RequestBodySpec buildUriSpec() {
-    attrValueMap.forEach((key, value) -> uriBuilder.queryParam(key, value));
+    //attrValueMap.entrySet().stream().filter().forEach((key, value) -> uriBuilder.queryParam(key, value));
     return bodyUriSpec.uri(uriBuilder.build(new Object()));
   }
 
